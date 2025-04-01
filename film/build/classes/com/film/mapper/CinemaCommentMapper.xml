@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间 用于隔离SQL语句 -->
+<mapper namespace="com.film.dao.CinemaCommentDao">
+    <resultMap type="CinemaComment" id="CinemaCommentResult">
+    	<id property="commentId" column="commentId"/>
+        <result property="content" column="content"/>
+        <result property="publishTime" column="publishTime"/>
+        <association property="cinema" column="cinemaId" select="com.film.dao.CinemaDao.findById"></association>
+        <association property="user" column="userId" select="com.film.dao.UserDao.findById"></association>
+    </resultMap>
+    
+	<!-- 新增影片评论 -->
+	<insert id="add" parameterType="CinemaComment">
+        insert into cinemacomment values(null,#{cinema.cinemaId},#{user.userId},#{content},#{publishTime})
+    </insert>
+    
+    <!-- 删除影片评论 -->
+    <delete id="delete" parameterType="int">
+    	 delete from cinemacomment where commentId=#{commentId}
+    </delete>
+    
+    <!-- 查询影片评论集合 -->
+    <select id="find" parameterType="Map" resultMap="CinemaCommentResult">
+		select * from cinemacomment 
+		<!-- start开始，size长度 -->
+		<if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+	</select>
+	
+    <!-- 按影院id查询  -->
+	<select id="findByCinemaId" parameterType="Integer" resultMap="CinemaCommentResult">
+		SELECT * FROM cinemacomment where cinemaId=#{cinema.cinemaId}
+	</select>
+	
+	<!-- 查询影片评论总数 -->
+	<select id="getTotal" parameterType="map" resultType="Long">
+		select count(*) from cinemacomment
+	</select>
+</mapper>

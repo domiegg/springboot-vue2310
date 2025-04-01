@@ -1,0 +1,209 @@
+.body{
+	display: flex;
+	min-height:900px;
+}
+
+.f_section1,.f_section2,.f_section3{
+	background: rgb(255,255,255,0.5);
+	border-radius:5px;
+	margin:10px 5px;
+	min-height: 900px;
+}
+.filmlist,.cinemalist{
+	border-radius:5px;
+}
+.f_section1{
+	width: 25%;	
+}
+.f_section2{
+	width: 55%;
+}
+.f_section3{
+	width: 20%;
+}
+
+.filmlist{
+	width: 100%;
+	min-height: 400px;
+}
+
+.cinemalist{
+	width: 100%;
+	min-height: 500px;
+}
+
+.search{
+	width:100%;
+	text-align:center;
+	padding:10px;
+	border-bottom:1px solid #cccccc;
+	height:70px;
+}
+
+.search span{
+	text-align:left;
+	width:30%;
+	margin-left:30px;
+	line-height:55px;
+	float:left;
+	font-size:24px;
+}
+
+.cpanelist{
+	margin-top:10px;
+}
+
+
+.fpanel{
+	filter:alpha(opacity=8);
+    opacity:0.80;
+    margin-top:5px;
+}
+
+.cvisit{
+	display:inline;
+	color: #337ab7;
+	font-size:14px;
+	font-weight:400;
+	float:right;
+}
+.flist{
+	width:98%;
+	margin-left:1%;
+	margin-right:1%;
+	margin-top:10px;
+	margin-bottom: 10px;
+	background-color:#FCFCFC;
+	filter:alpha(opacity=80);
+    opacity:0.8;
+	border-radius: 5px;
+	font-size:14px;
+	color: #333;
+	text-align:center;
+	border-radius: 10px;
+	border-color: #ddd;
+}
+
+.flist tr{
+	
+	border-top: 1px solid #ddd;
+	height:35px;
+}
+
+.flist tr:hover{
+	background-color:#F5F5F5;
+}
+
+.flist th{
+	text-align:center;
+}
+
+.flist td{
+	text-align:center;
+	vertical-align:middle;
+	
+}
+
+.article{
+	margin-top:5px;
+}
+
+.article button{
+	float:right;
+	bottom:5px;
+}
+
+.panel-title{
+	display:inline;
+}
+
+.time{
+	float:right;
+	right:0px;
+	display:inline;
+	color: #337ab7;
+	font-size:14px;
+	font-weight:400;
+	margin-top:5px;
+}
+.articlecontent{
+	color:black;
+	margin-top:10px;
+	margin-bottom:10px;
+	margin-left:2%;
+	margin-right:2%;
+	font-size:16px;
+}
+
+.alist{
+	width:98%;
+	margin-left:1%;
+	margin-right:1%;
+	margin-top:10px;
+	background-color:white;	
+	filter:alpha(opacity=80);
+    opacity:0.8;
+	border-radius: 5px;
+	font-size:16px;
+	color: #333;
+	text-align:center;
+}
+
+.alist th{
+	text-align:center;
+}
+
+.alist .abody td{
+	text-align:center;
+	vertical-align:middle;
+}
+
+.farrange{
+	
+}
+
+
+.active{
+	filter:alpha(opacity=90);
+    opacity:0.9;
+}
+.myTab li{
+	font-size:14px;
+	font-weight:600;
+}
+
+.clist{
+	width:98%;
+	margin-left:1%;
+	margin-right:1%;
+	margin-top:10px;
+	background-color:white;	
+	filter:alpha(opacity=80);
+    opacity:0.8;
+	border-radius: 5px;
+	font-size:14px;
+	color: #333;
+	text-align:center;
+}
+
+.clist th{
+	text-align:center;
+}
+
+.clist .cbody td{
+	text-align:center;
+	vertical-align:middle;
+}
+
+.visit{
+	display:inline;
+	color: #337ab7;
+	font-size:14px;
+	font-weight:400;
+}
+.visit a:link{
+	color: #337ab7;
+}
+.visit a{
+	color: #337ab7;
+}

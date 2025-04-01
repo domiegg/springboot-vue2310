@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<beans xmlns="http://www.springframework.org/schema/beans"    
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc" 
+    xsi:schemaLocation="    
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd  
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">    
+
+	<!-- @Controller注解包扫描器 -->
+    <context:component-scan base-package="com.film.controller" />
+    
+    <!--配置注解驱动，相当同时使用了处理器映射器和处理器适配器  -->
+	<mvc:annotation-driven/>
+	
+	<!-- 配置视图解析器 -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 配置视图响应的前缀 -->
+		<property name="prefix" value="/"/>
+		<!-- 配置视图响应的后缀 -->
+		<property name="suffix" value=".jsp"/>
+	</bean>
+
+	<!-- 静态资源访问 -->
+	<mvc:default-servlet-handler/>
+	
+	<!--  -->
+	<bean id="multipartResolver"    
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">    
+        <!-- set the max upload size100MB -->    
+        <property name="maxUploadSize">    
+            <value>104857600</value>    
+        </property>    
+        <property name="maxInMemorySize">    
+            <value>4096</value>    
+        </property>   
+        <property name="defaultEncoding">  
+            <value>utf-8</value>  
+        </property>  
+    </bean>   
+	
+</beans>  

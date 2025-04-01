@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间 用于隔离SQL语句 -->
+<mapper namespace="com.film.dao.BoughtFilmDao"> 
+    <resultMap type="BoughtFilm" id="BoughtFilmResult">
+    	<id property="boughtId" column="boughtId"/>
+        <result property="userId" column="userId"/>
+        <result property="purchasingDate" column="purchasingDate"/>
+        <association property="cinema" column="cinemaId" select="com.film.dao.CinemaDao.findById"></association>
+        <association property="film" column="filmId" select="com.film.dao.FilmDao.findById"></association>
+        <association property="filmArrangement" column="filmArrangementId" select="com.film.dao.FilmArrangementDao.findById"></association>
+    </resultMap>
+    
+	<!-- 购票 -->
+	<insert id="add" parameterType="BoughtFilm">
+        insert into boughtfilm values(null,#{userId},#{filmArrangement.arrangementId},#{film.filmId},#{cinema.cinemaId},#{purchasingDate})
+    </insert>
+    
+    <!-- 退票 -->
+    <delete id="delete" parameterType="BoughtFilm">
+    	 delete from boughtfilm where boughtId=#{boughtId} and (select filmStartTime from filmarrangement where arrangementId = #{filmArrangement.arrangementId}) > now()
+    </delete>
+    
+    <!-- 查询购票集合 -->
+    <select id="findByUserId" parameterType="int" resultMap="BoughtFilmResult">
+		select * from boughtfilm where userId=#{userId} 	
+		<if test="startPos!=null and pageSize!=null">
+          limit #{startPos},#{pageSize} 
+        </if>
+	</select>
+	
+	<!-- 查询购票总数 -->
+	<select id="getTotal" parameterType="int" resultType="int">
+		select count(*) from boughtfilm where userId=#{userId}
+	</select>
+	<!-- 查询是否有购票 -->
+	<select id="find" parameterType="int" resultType="int">
+		select count(*) from boughtfilm where filmArrangementId=#{filmArrangementId}
+	</select>
+</mapper>

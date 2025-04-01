@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间 用于隔离SQL语句 -->
+<mapper namespace="com.film.dao.UserDao">  
+    <resultMap type="User" id="UserResult">
+    	<id property="userId" column="userId"/>
+        <result property="name" column="name"/>
+        <result property="password" column="password"/>
+    <!--<result property="gender" column="gender"/>
+        <result property="birthday" column="birthday"/>
+        <result property="address" column="address"/> -->
+        <result property="phone" column="phone"/>
+        <result property="registrationTime" column="registrationTime"/>
+        <result property="authority" column="authority"/>
+    </resultMap>
+    
+    <!-- 登录 -->
+    <select id="login" parameterType="User" resultMap="UserResult">
+        select * from user where phone = #{phone} 
+        	and password = #{password} 
+        	<!-- and authority = #{authority} -->
+    </select> 
+    
+    <!-- 注册 -->
+	<insert id="register" parameterType="User">
+		insert into user(name,phone,password,registrationTime,authority) values(#{name},#{phone},#{password},#{registrationTime},0)
+	</insert>
+	
+	<!-- 删除用户 -->
+	<delete id="delete" parameterType="int">
+		delete from user where userId=#{userId}
+	</delete>
+	
+	<!-- 修改用户个人信息 -->
+    <update id="update" parameterType="User">
+		update user 
+		<set>
+            <if test="name!=null and name!='' ">  
+            	name=#{name},
+            </if>
+            <if test="phone!=null and phone!='' ">  
+            	phone=#{phone},
+            </if>
+			<if test="password!=null and password!='' "> 
+            	password=#{password},    
+            </if>
+            <if test="authority!=0 "> 
+            	authority=#{authority}    
+            </if>
+        </set>
+		where userId=#{userId}
+	</update>
+  
+    <!-- 查询用户集合 -->
+    <select id="find" parameterType="Map" resultMap="UserResult">
+		select * from user 
+		<where>
+			<if test="name!=null and name!=''">
+				and name like #{name}
+			</if>
+		</where>
+		<!-- start开始，size长度 -->
+		<if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+	</select>
+	
+	<!-- 查询用户总数 -->
+	<select id="getTotal" parameterType="map" resultType="Long">
+		select count(*) from user
+	</select>
+
+	<!-- 根据id获取用户 -->
+	<select id="findById" parameterType="Integer" resultMap="UserResult">
+		select * from user where userId=#{userId}
+	</select>
+	
+	<!-- 根据phone获取用户 -->
+	<select id="findByPhone" parameterType="long" resultMap="UserResult">
+		select * from user where phone=#{phone}
+	</select>
+</mapper>

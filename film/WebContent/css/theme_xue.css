@@ -1,0 +1,25 @@
+body{
+	background: url(../img/bg2.jpg) repeat-y;
+	background-size:100%;
+}
+
+.left,.contain1,.contain2,.contain3,.contain4,.contain5,.contain6{
+	 background: rgb(255,255,255,0.3);
+}
+
+.header{
+	background: rgb(60,60,60);
+}
+
+.search span{
+	color:black;
+}
+
+.userin span{
+	color:#cccccc;
+}
+
+
+
+
+

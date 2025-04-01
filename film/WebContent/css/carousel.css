@@ -1,0 +1,123 @@
+﻿@charset "utf-8";
+
+*{
+	box-sizing: border-box;
+}
+body,div,p,h1{
+	margin: 0;
+	padding: 0;
+}
+img{
+	border: 0;
+	display: block;
+	max-width: 100%;
+	vertical-align: middle;
+}
+.section1{
+	width:100%;
+	height:520px;
+	margin:0 auto;
+}
+.js-silder{
+	position: relative;	
+	min-width: 320px;
+    height:300px;
+}
+.silder-scroll{
+	width: 100%;
+	overflow: hidden;
+}
+.silder-main{
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+    height:300px;
+}
+.silder-main-img{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+.silder-main-img img{
+	width: 100%;
+	height: 500px;
+}
+.js-silder-ctrl{
+	width: 100%;
+	text-align: center;
+}
+.silder-ctrl-prev,
+.silder-ctrl-next{
+	position: absolute;
+	top: 0;
+	width: 8%;
+	height: 100%;
+	vertical-align: middle;
+	cursor: pointer;
+	color: #fff;
+	font-family: "宋体";
+	font-size: 52px;
+	font-weight: 600;
+	text-shadow: #666 2px 2px 5px;
+}
+.silder-ctrl-prev{
+	left: 5px;
+	text-align: left;
+    height:300px;
+}
+.silder-ctrl-next{
+	right: 5px;
+	text-align: right;
+    height:300px;
+}
+.silder-ctrl-prev>span,
+.silder-ctrl-next>span{
+	position: absolute;
+	top: 200px;
+}
+.silder-ctrl-prev>span{
+	left: 0;
+}
+.silder-ctrl-next>span{
+	right: 0;
+}
+.silder-ctrl-con{
+	display: inline-block;
+	width: 4%;
+	padding: 10px 0;
+	margin: 0 10px;
+	cursor: pointer;
+}
+.silder-ctrl-con>span{
+	display: block;
+	line-height: 0;
+	text-indent: -9999px;
+	overflow: hidden;
+	padding: 5px 0;
+	cursor: pointer;
+	background-color: #e4e4e4;
+}
+
+
+@media (max-width: 768px){
+	.silder-ctrl-prev,
+	.silder-ctrl-next{
+		width: 10%;
+		font-size: 26px;
+		margin-top: -25px;
+	}
+	.silder-ctrl-con{
+		width: 14px;
+		height: 14px;
+		padding: 0;
+		margin: 0 5px;
+	}
+	.silder-ctrl-con>span{
+		display: block;
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+		padding: 0;
+	}
+}

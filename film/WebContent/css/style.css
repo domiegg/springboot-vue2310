@@ -1,0 +1,112 @@
+body{
+	color: #8c8c8c;
+	font-size: 18px;
+	font-family:'Open Sans', Helvetica, Arial, sans-serif;
+	font-weight: 300;
+	margin: 0px;
+	padding: 0px;
+	overflow-x: hidden;
+}
+
+a:link{
+	/* color: white; */
+}
+
+a:visited{
+	color: white;
+}
+
+a:hover,
+a:focus {
+	text-decoration: none;
+	outline: none;
+}
+
+
+.header .nav{
+	text-align: right;
+	line-height: 50px;
+}
+
+.header a{
+	display: block;
+	float: right;
+	width: 100px;
+	height: 50px;
+	color:#FFFFFF;
+	text-decoration: none;
+	text-align: center;
+}
+.header .btn_login{
+	margin: 5px;
+	width: 80px;
+	height: 40px;
+	border: solid white 1px;
+	text-align: center;
+	padding-right: 5px;
+	font-size: 16px;
+}
+
+.header a:hover{ 
+	background-color:#C6C6C6;
+	color:#66AFE9;
+	font-weight:500;
+}
+
+
+/*.body{
+	float: right;
+}*/
+
+.section1{
+	height:auto;
+	min-height:540px;
+	width:100%;
+	height:auto;
+}
+
+.section2{
+	height:auto;
+	min-height:540px;
+	width:100%;
+	height:auto;
+}
+
+.section3{
+	height:auto;
+	min-height:540px;
+	width:100%;
+	height:auto;
+	margin-top: 40px;
+}
+
+.user-dropdown{
+	float: right;
+	padding:0px 40px 0px 40px;
+	font-size: 18px;
+}
+
+.user-exit{
+    min-width: 100px;
+    background-color: #8c8c8c; 
+    filter:alpha(opacity=60);
+    opacity:0.6;
+    padding: 0 0;
+    margin: 0 0;
+    top:50px;
+    font-size:16px;
+    color: white;  
+}
+.user-exit .menua{
+	line-height:50px;
+	padding:0px;
+	color:white;
+}
+
+.footer{
+	position: relative;
+	text-align: center;
+	font-family:Arial,Helvetica,sans-serif,SimSun;
+	line-height: 50px;
+	font-size: 14px;
+}

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间 用于隔离SQL语句 -->
+<mapper namespace="com.film.dao.FilmArrangementDao">
+    <resultMap type="FilmArrangement" id="FilmArrangementResult">
+    	<id property="arrangementId" column="arrangementId"/>
+        <result property="filmStartTime" column="filmStartTime"/>
+        <result property="filmEndTime" column="filmEndTime"/>
+        <result property="language" column="language"/>
+        <result property="filmHall" column="filmHall"/>
+        <result property="seatCount" column="seatCount"/>
+        <result property="price" column="price"/>
+        <association property="cinema" column="cinemaId" select="com.film.dao.CinemaDao.findById"></association>
+        <association property="film" column="filmId" select="com.film.dao.FilmDao.findById"></association>
+    </resultMap>
+    
+	<!-- 新增电影排片 -->
+	<insert id="add" parameterType="FilmArrangement">
+        insert into filmarrangement values(null,#{film.filmId},#{cinema.cinemaId},#{filmStartTime},#{filmEndTime},#{language},#{filmHall},#{seatCount},#{price})
+    </insert>
+    
+    <!-- 删除电影排片 -->
+    <delete id="delete" parameterType="int">
+    	 delete from filmarrangement where arrangementId=#{arrangementId}
+    </delete>
+    
+    <!-- 修改电影排片 -->
+   	<update	id="update"  parameterType="FilmArrangement">
+   		update filmarrangement 
+		<set>
+			<if test="filmStartTime!=null">  
+	   		filmStartTime=#{filmStartTime},
+	   		</if>
+	   		<if test="filmEndTime!=null">  
+	   		filmEndTime=#{filmEndTime},
+	   		</if>
+	   		<if test="language!=null and language!='' ">
+	   		language=#{language},
+	   		</if>
+	   		<if test="filmHall!=null and filmHall!='' ">
+	   		filmHall=#{filmHall},
+	   		</if>
+	   		<if test="seatCount>=0">
+	   		seatCount=#{seatCount},
+	   		</if>
+	   		<if test="price!=null and price!='' ">
+	   		price=#{price} 
+	   		</if>
+   		</set>
+   		where arrangementId=#{arrangementId}
+   	</update>
+   	
+    <!-- 查询电影排片集合 -->
+    <select id="find" parameterType="Map" resultMap="FilmArrangementResult">
+		select * from filmarrangement 
+		<!-- start开始，size长度 -->
+		<if test="start!=null and size!=null">
+          limit #{start},#{size} 
+        </if>
+	</select>
+	  
+    
+	<!-- 查询电影排片总数 -->
+	<select id="getTotal" resultType="int">
+		select count(*) from filmarrangement where filmStartTime > now() order by cinemaId,filmStartTime
+	</select>
+	<!-- 按ID查询电影排片总数 -->
+	<select id="getTotalById" parameterType="map" resultType="int">
+		select count(*) from filmarrangement where cinemaId=#{cinemaId} 
+	</select>
+	
+	<!-- 根据id获取电影排片 -->
+	<select id="findById" parameterType="Integer" resultMap="FilmArrangementResult">
+		select * from filmarrangement where arrangementId=#{arrangementId}
+	</select>
+	
+	<!-- 按影院id查询  -->
+	<select id="findByCinema" parameterType="Integer" resultMap="FilmArrangementResult">
+		select * from filmarrangement where cinemaId=#{cinemaId} 
+		<if test="startPos!=null and pageSize!=null">
+          limit #{startPos},#{pageSize} 
+        </if>
+	</select>
+	
+	<!-- 影院排序查询 -->
+	<select id="findByCinemaOrder" resultMap="FilmArrangementResult">
+		select * from filmarrangement where filmStartTime > now() order by cinemaId,filmStartTime
+		<if test="startPos!=null and pageSize!=null">
+          limit #{startPos},#{pageSize} 
+        </if>
+	</select>
+	
+	<!-- 影片排序查询 -->
+	<select id="findByFilmOrder" resultMap="FilmArrangementResult">
+		select * from filmarrangement where filmStartTime > now() order by filmId,filmStartTime
+		<if test="startPos!=null and pageSize!=null">
+          limit #{startPos},#{pageSize} 
+        </if>
+	</select>
+	
+	<!-- 按影院id查询  -->
+	<select id="findByCinemaId" parameterType="Integer" resultMap="FilmArrangementResult">
+		select * from filmarrangement where filmStartTime > now() and cinemaId=#{cinemaId}
+	</select>
+	
+	<!-- 按影片id查询  -->
+	<select id="findByFilmId" parameterType="Integer" resultMap="FilmArrangementResult">
+		select * from filmarrangement where filmStartTime > now() and filmId=#{filmId}
+	</select>
+	
+</mapper>

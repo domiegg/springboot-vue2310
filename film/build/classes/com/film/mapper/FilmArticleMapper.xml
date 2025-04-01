@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间 用于隔离SQL语句 -->
+<mapper namespace="com.film.dao.FilmArticleDao">
+    <resultMap type="FilmArticle" id="FilmArticleResult">
+    	<id property="articleId" column="articleId"/>
+    	<result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="publishTime" column="publishTime"/>
+ 		<association property="film" column="filmId" select="com.film.dao.FilmDao.findById"></association>
+ 		<association property="user" column="userId" select="com.film.dao.UserDao.findById"></association>
+    </resultMap>
+    
+	<!-- 新增影评 -->
+	<insert id="add" parameterType="FilmArticle">
+        insert into filmarticle values(null,#{film.filmId},#{user.userId},#{title},#{content},#{publishTime})
+    </insert>
+    
+    <!-- 删除影评 -->
+    <delete id="delete" parameterType="int">
+    	 delete from filmarticle where articleId=#{articleId}
+    </delete>
+    
+    <!-- 查询影评集合 -->
+    <select id="find" parameterType="Map" resultMap="FilmArticleResult">
+		select * from filmarticle 
+		<!-- start开始，size长度 -->
+		<if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+	</select>
+	
+	<!-- 查询影评总数 -->
+	<select id="getTotal" parameterType="map" resultType="Long">
+		select count(*) from Filmarticle
+	</select>
+	
+	<!-- 按用户id查询  -->
+	<select id="findByUserId" parameterType="Integer" resultMap="FilmArticleResult">
+		SELECT * FROM filmarticle where userId=#{user.userId}
+	</select>
+	
+	<!-- 按影片id查询  -->
+	<select id="findByFilmId" parameterType="Integer" resultMap="FilmArticleResult">
+		SELECT * FROM filmarticle where filmId=#{film.filmId}
+	</select>
+	
+	<!-- 按id查询 -->
+	<select id="findById" parameterType="Integer" resultMap="FilmArticleResult">
+		SELECT * FROM filmarticle where filmarticleId=#{filmarticleId}
+	</select>
+	
+	<!-- 按关键字查询 -->
+	<select id="findBySearch" parameterType="FilmArticle" resultMap="FilmArticleResult">
+		SELECT * FROM filmarticle where userId=#{user.userId} and content like '%${content}%' 
+	</select>
+</mapper>

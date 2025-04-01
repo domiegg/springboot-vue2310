@@ -1,0 +1,133 @@
+@charset "utf-8";
+
+/**基本格式开始***************/
+
+ul {
+	list-style: none;
+}
+
+/*森科单页头部开始*/
+
+.section2 {
+	background: url(../img/dy_pic11.jpg);
+}
+
+.section2 .students {
+	margin: 0 auto;
+	width: 90%;
+	height: 500px;
+	position: relative;
+}
+
+.section2 .students p.PP {
+	width: 510px;
+	height: 50px;
+	font-size: 16px;
+	color: #333;
+	text-align: center;
+	position: absolute;
+	top: 60px;
+	left: 300px;
+}
+
+#four_flash {
+	position: relative;
+	width: 100%;
+	height: 400px;
+	margin: 0 auto;
+	position: absolute;
+	bottom: 40px;
+}
+
+#four_flash .flashBg {
+	width: 100%;
+	height: 400px;
+	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
+}
+
+#four_flash .flashBg ul.mobile {
+	width: 2000%;
+	height: 400px;
+	position: absolute;
+	top: 15;
+	left: 0;
+}
+
+#four_flash .flashBg ul.mobile li {
+	border: 10px solid #2E324B;
+	float: left;
+	width: 280px;
+	height: 400px;
+	margin-left: 26px;
+	padding-top: 40px;
+	color: #6C6E85;
+}
+
+#four_flash .flashBg ul.mobile li:hover {
+	border: 10px solid #343851;
+	color: #fff;
+}
+
+#four_flash .flashBg ul.mobile li img {
+	width: 140px;
+	height: 140px;
+	display: block;
+	margin: 0 auto;
+	border: 10px solid #343851;
+	border-radius: 82px;
+}
+
+#four_flash .flashBg ul.mobile li dd {
+	font-size: 20px;
+	width: 250px;
+	line-height: 60px;
+	text-align: center;
+	border-bottom: 1px solid #6C6E85;
+}
+
+#four_flash .flashBg ul.mobile li p {
+	font-size: 16px;
+	text-align: center;
+	width: 250px;
+	line-height: 24px;
+	margin-top: 10px;
+}
+
+#four_flash .flashBg ul.mobile li a {
+	display: block;
+	background: url(../img/jiantou.png);
+	width: 31px;
+	height: 31px;
+	border: 0px;
+	margin: 8px auto;
+}
+
+#four_flash .flashBg ul.mobile li a:hover {
+	background: url(../img/jiantou2.png);
+}
+
+#four_flash .but_left {
+	width: 50px;
+	height: 100px;
+	position: absolute;
+	top: 136px;
+	left: 0px;
+}
+
+#four_flash .but_right {
+	width: 50px;
+	height: 100px;
+	position: absolute;
+	top: 136px;
+	right: 0px;
+}
+
+#four_flash .but_left:hover {
+	background: url(../img/qianxleft1.png) no-repeat;
+}
+
+#four_flash .but_right:hover {
+	background: url(../img/qianxr1.png) no-repeat;
+}

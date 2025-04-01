@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间 用于隔离SQL语句 -->
+<mapper namespace="com.film.dao.CinemaDao">
+    <resultMap type="Cinema" id="CinemaResult">
+    	<id property="cinemaId" column="cinemaId"/>
+        <result property="password" column="password"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <result property="description" column="description"/>
+        <result property="location" column="location"/>
+        <result property="cover" column="cover"/>
+        <result property="registrationTime" column="registrationTime"/>
+    </resultMap>
+    
+    <!-- 登录 -->
+    <select id="login" parameterType="Cinema" resultMap="CinemaResult">
+        select * from cinema where phone = #{phone} 
+        	and password = #{password} 
+    </select> 
+    
+	<!-- 注册 -->
+	<insert id="register" parameterType="Cinema">
+		insert into cinema(name,phone,password,description,location,cover,registrationTime) values(#{name},#{phone},#{password},#{description},#{location},'img/yy.jpg',#{registrationTime})
+	</insert>
+
+	<!-- 删除影院用户 -->
+	<delete id="delete" parameterType="int">
+		delete from cinema where cinemaId=#{cinemaId}
+	</delete>
+
+	<!-- 修改影院信息 -->
+    <update id="update" parameterType="Cinema">
+		update cinema 
+		<set>
+		  <if test="phone!=null and phone!='' ">  
+            phone=#{phone},
+            </if>
+            <if test="name!=null and name!='' ">  
+            name=#{name},
+            </if>
+            <if test="description!=null and description!='' "> 
+            description=#{description},
+            </if>
+            <if test="location!=null and location!='' "> 
+            location=#{location},
+            </if>
+            <if test="cover!=null and cover!='' "> 
+            cover=#{cover},
+            </if>
+            <if test="password!=null and password!='' "> 
+            password=#{password}    
+            </if>
+        </set>
+		where cinemaId=#{cinemaId}
+	</update>
+
+	<!-- 查询影院集合 -->
+    <select id="find" parameterType="Map" resultMap="CinemaResult">
+		select * from cinema 
+		<where>
+			<if test="name!=null and name!=''">
+				and name like #{name}
+			</if>
+			<if test="location!=null and location!=''">
+				and location like #{location}
+			</if>			
+		</where>
+		<!-- start开始，size长度 -->
+		<if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+	</select>
+	
+	<!-- 查询用户总数 -->
+	<select id="getTotal" parameterType="Map" resultType="Long">
+		select count(*) from cinema
+	</select>
+	<select id="totalGet"  resultType="int">
+		select count(*) from cinema
+	</select>
+	
+	<!-- 根据id获取影院 -->
+	<select id="findById" parameterType="Integer" resultMap="CinemaResult">
+		select * from cinema where cinemaId=#{cinemaId}
+	</select>
+	
+	<!-- 首页获取影院 -->
+	<select id="indexFind" resultMap="CinemaResult">
+		select * from cinema
+	</select>
+	
+	<!-- 首页获取影院 -->
+	<select id="randFind" resultMap="CinemaResult">
+		select * from cinema order by rand() limit 10
+	</select>
+	
+	<!-- 影院列表 -->
+	<select id="cinemaFind" parameterType="Map" resultMap="CinemaResult">
+		select * from cinema
+		<if test="startPos!=null and pageSize!=null">
+          limit #{startPos},#{pageSize} 
+        </if>
+	</select>
+	
+	<!-- 根据phone获取影院 -->
+	<select id="findByPhone" parameterType="long" resultMap="CinemaResult">
+		select * from cinema where phone=#{phone}
+	</select>
+</mapper>

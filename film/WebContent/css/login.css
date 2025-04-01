@@ -1,0 +1,220 @@
+
+.signin{
+	float:right;
+	background: transparent;
+	color:white;
+	font-size:24px;
+	display:block;
+	z-index:10;
+}
+.userin{
+	height:80%;
+	float:right;
+	background: transparent;
+	color:white;
+	font-size:24px;
+	display:none;
+}
+
+.userp{
+	cursor:pointer;
+	margin:0px;
+	height:100%;
+	width:auto;
+}
+
+.event{
+	position: fixed;
+	top: 22%;
+	left: 38%;
+	z-index: 9999;
+}
+.login{
+	text-align:center;
+	width:32%;
+	min-width: 400px;
+	height: 320px;
+	background: #ffffff;
+	background: rgba(255,255,255,.5);
+	/*opacity: .6;
+	-moz-opacity: .6;
+	-webkit-opacity: .6;*/
+	filter: alpha(opacity=50);
+	box-shadow: 0 0 30px black;
+	border-radius: 10px;	
+	
+}
+
+.register{
+	width:32%;
+	min-width: 400px;
+	height: 500px;
+	background: #ffffff;
+	background: rgba(255,255,255,.6);
+	/*opacity: .6;
+	-moz-opacity: .6;
+	-webkit-opacity: .6;*/
+	filter: alpha(opacity=50);
+	box-shadow: 0 0 30px black;
+	border-radius: 10px;	
+	
+}
+.title1{
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+	border-bottom: 1px solid #cccccc;
+	position: relative;
+	margin-bottom:8px;
+}
+.t_txt{
+	float: left;
+	margin-left: 20px;
+	font-size: 16px;
+	color: black;
+	position: relative;
+}
+.r_txt{
+	margin-left: 20px;
+	left:15%;
+	font-size: 16px;
+	color: black;
+	position: relative;
+}
+.del{
+	float: right;
+	margin-right: 20px;
+	color: #ffffff;
+	position: relative;
+}
+.del:hover{
+	color: #000000;
+	cursor: pointer;
+}
+.back{
+	float: left;
+	margin-right: 20px;
+	color: #ffffff;
+	position: relative;
+}
+.back:hover{
+	color: #000000;
+	cursor: pointer;
+}
+
+.login input{
+	display: block;
+	margin-left:10%;
+	width:80%;
+	height: 45px;
+	line-height: 35px;
+	margin-top: 20px;
+	text-indent: 20px;
+	border: 1px solid #cccccc;
+	
+}
+.login label{
+	margin-left:10px;
+	margin-top: 10px;
+	font-size:16px;
+	color:darkslategrey;
+	font-weight: 500;
+}
+.login .radio-btn{
+	width: 20px;
+    height: 20px;
+    display: inline-block;
+    float: left;
+    margin: 3px 7px 0 0;
+    position: relative; 
+}
+
+.register input{
+	display: block;
+	margin-left:10%;
+	width:80%;
+	height: 45px;
+	line-height: 35px;
+	margin-bottom: 8px;
+	text-indent: 20px;
+	border: 1px solid #cccccc;	
+}
+
+
+.register span{
+	margin-left:10%;
+	font-size:16px;
+	color:darkslategrey;
+}
+
+.register button{
+	float:left;
+	margin-top: 10px;
+	width:50%;
+	height:45px;
+	margin-left:25%;
+}
+
+.register label{
+	margin-left:60px;
+	margin-top: 10px;
+	font-size:16px;
+	color:darkslategrey;
+	font-weight: 500;
+}
+
+.register .radio-btn{
+	width: 20px;
+    height: 20px;
+    display: inline-block;
+    float: left;
+    margin: 3px 10px 0 0;
+    position: relative; 
+}
+
+.login button{
+	float:left;
+	margin-top: 4px;
+	width:34%;
+	height:45px;
+	margin-left:11%;
+}
+
+.login #phone{
+	padding-left:51px;
+	background: url(../img/login_user.png) 0 0 white no-repeat;
+}
+
+.login #password{
+	padding-left:51px;
+	background: url(../img/login_pas.png) 0 0 white no-repeat;
+}
+
+
+.bg_color{
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.4) !important;
+	filter: alpha(opacity=40) !important;
+	position: fixed !important;	
+	top: 0;
+	z-index: 99;
+}
+
+.loginerr{
+	display:none;
+	margin-left:10%;
+	width:80%;
+	float:left;
+	height:45px;
+}
+
+
+.regerr{
+	display:none;
+	margin-left:10%;
+	width:80%;
+	float:left;
+	height:45px;
+}
+

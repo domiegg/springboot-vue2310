@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间 用于隔离SQL语句 -->
+<mapper namespace="com.film.dao.FilmDao">  
+    <resultMap type="Film" id="FilmResult">
+    	<id property="filmId" column="filmId"/>
+        <result property="filmName" column="filmName"/>
+        <result property="director" column="director"/>
+        <result property="actor" column="actor"/>
+        <result property="cover" column="cover"/>
+        <result property="type" column="type"/>
+        <result property="startTime" column="startTime"/>
+        <result property="endTime" column="endTime"/>
+        <result property="description" column="description"/>
+        <result property="likeCount" column="likeCount"/>
+        <result property="registrationTime" column="registrationTime"/>
+        <result property="times" column="times"/>
+    </resultMap>
+    
+	<!-- 新增影片 -->
+	<insert id="add" parameterType="Film">
+        insert into film values(null,#{filmName},#{director},#{actor},#{cover},#{type},#{startTime},#{endTime},#{description},0,now(),0)
+    </insert>
+    
+    <!-- 删除影片 -->
+    <delete id="delete" parameterType="int">
+    	 delete from film where filmId=#{filmId}
+    </delete>
+    
+    <!-- 修改影片 -->
+   	<update	id="update"  parameterType="Film">
+   		update film 
+		<set>
+			<if test="filmName!=null and filmName!='' ">  
+		   		filmName=#{filmName},
+		   	</if>
+            <if test="director!=null and director!='' ">  
+		   		director=#{director},
+		   	</if>
+            <if test="actor!=null and actor!='' ">  
+		   		actor=#{actor},
+		   	</if>
+         <if test="cover!=null and cover!='' ">  
+		   		cover=#{cover},
+		   	</if> 
+            <if test="type!=null and type!='' ">  
+		   		type=#{type},
+		   	</if>
+            <if test="startTime!=null">  
+		   		startTime=#{startTime},
+		   	</if>
+            <if test="endTime!=null">  
+		   		endTime=#{endTime},
+		   	</if>
+            <if test="likeCount>=0">  
+		   		likeCount=#{likeCount},
+		   	</if>
+		   	<if test="description!=null and description!='' ">
+		   	    description=#{description},
+		   	</if>
+		   	<if test="times>=0">
+		   	    times=#{times}
+		   	</if>
+         </set>
+		 where filmId=#{filmId}
+   	</update>
+   	
+    <!-- 查询影片集合 -->
+    <select id="find" parameterType="Map" resultMap="FilmResult">
+		select * from film 
+		<where>
+			<if test="filmName!=null and filmName!=''">
+				and filmName like #{filmName}
+			</if>
+			<if test="director!=null and director!=''">
+				and director like #{director}
+			</if>
+			<if test="actor!=null and actor!=''">
+				and actor like #{actor}
+			</if>
+			<if test="type!=null and type!=''">
+				and type like #{type}
+			</if>
+		</where>
+		<!-- start开始，size长度 -->
+		<if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+	</select>
+	
+	<!-- 查询影片总数 -->
+	<select id="getTotal" parameterType="map" resultType="Long">
+		select count(*) from film
+	</select>
+	
+	<!-- 根据id获取影片 -->
+	<select id="findById" parameterType="Integer" resultMap="FilmResult">
+		select * from film where filmId=#{filmId}
+	</select>
+	
+	<!-- 获取全部影片 -->
+	<select id="indexFind" resultMap="FilmResult">
+		select * from film order by likeCount desc
+	</select>
+	
+	<!-- 获取推荐影片 -->
+	<select id="likeFilmList" resultMap="FilmResult">
+		select * from film order by times desc ,likeCount desc limit 8
+	</select>
+	<!-- 浏览记录-->
+	<update id="updateTimes"  parameterType="Integer" >
+		update film set times=times+1 where filmId=#{filmId}
+	</update>
+</mapper>

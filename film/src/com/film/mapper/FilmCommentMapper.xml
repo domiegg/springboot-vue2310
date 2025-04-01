@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间 用于隔离SQL语句 -->
+<mapper namespace="com.film.dao.FilmCommentDao">   
+    <resultMap type="FilmComment" id="FilmCommentResult">
+    	<id property="fimCommentId" column="fimCommentId"/>
+        <result property="content" column="content"/>
+        <result property="publishTime" column="publishTime"/>
+        <association property="film" column="filmId" select="com.film.dao.FilmDao.findById"></association>
+        <association property="user" column="userId" select="com.film.dao.UserDao.findById"></association>
+    </resultMap>
+    
+	<!-- 新增影片评论 -->
+	<insert id="add" parameterType="FilmComment">
+        insert into filmcomment values(null,#{film.filmId},#{user.userId},#{content},#{publishTime})
+    </insert>
+    
+    <!-- 删除影片评论 -->
+    <delete id="delete" parameterType="int">
+    	 delete from filmcomment where fimCommentId=#{fimCommentId}
+    </delete>
+    
+    <!-- 查询影片评论集合 -->
+    <select id="findByFilmId" parameterType="Integer" resultMap="FilmCommentResult">
+		select * from filmcomment where filmId=#{film.filmId}
+	</select>
+	
+	<!-- 查询影片评论总数 -->
+	<select id="getTotal" parameterType="map" resultType="Long">
+		select count(*) from filmcomment
+	</select>
+</mapper>

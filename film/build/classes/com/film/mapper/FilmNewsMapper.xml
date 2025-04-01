@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间 用于隔离SQL语句 -->
+<mapper namespace="com.film.dao.FilmNewsDao">   
+    <resultMap type="FilmNews" id="FilmNewsResult">
+    	<id property="newsId" column="newsId"/>
+        <result property="newsTitle" column="newsTitle"/>
+        <result property="newsContent" column="newsContent"/>
+        <result property="publishTime" column="publishTime"/>
+        <result property="picture" column="picture"/>
+        <association property="cinema" column="cinemaId" select="com.film.dao.CinemaDao.findById"></association> 
+    </resultMap>
+    
+	<!-- 新增资讯 -->
+	<insert id="add" parameterType="FilmNews">
+        insert into filmnews values(null,#{cinema.cinemaId},#{newsTitle},#{newsContent},#{publishTime},#{picture})
+    </insert>
+    
+    <!-- 删除资讯 -->
+    <delete id="delete" parameterType="int">
+    	 delete from filmnews  where newsId=#{newsId}
+    </delete>
+
+   	
+    <!-- 查询资讯集合 -->
+    <select id="find" parameterType="Map" resultMap="FilmNewsResult">
+		select * from filmnews 
+		<where>
+			 <if test="newsTitle!=null and newsTitle!='' ">
+                and newsTitle like #{newsTitle}
+            </if>
+		</where>
+		<!-- start开始，size长度 -->
+		<if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+	</select>
+	
+    <!-- 按影院id查询  -->
+	<select id="findByCinemaId" parameterType="Integer" resultMap="FilmNewsResult">
+		SELECT * FROM filmnews where cinemaId=#{cinemaId}
+	</select>
+	
+	<!-- 按关键字查询 -->
+	<select id="findBySearch" parameterType="FilmNews" resultMap="FilmNewsResult">
+		SELECT * FROM filmnews where cinemaId=#{cinema.cinemaId} and (newsTitle like '%${newsTitle}%' or newsContent like '%${newsContent}%') 
+	</select>
+	
+	<!-- 查询资讯总数 -->
+	<select id="getTotal" parameterType="map" resultType="Long">
+		select count(*) from filmnews
+	</select>
+</mapper>
